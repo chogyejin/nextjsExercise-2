@@ -1,17 +1,20 @@
 import Link from 'next/link';
+import navStyles from '../styles/Nav.module.css';
 
 export default function Nav() {
   return (
     <>
-      <ul>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
+      <nav className={navStyles.nav}>
+        <ul>
+          <li>
+            <Link href="/">Home</Link>
+          </li>
 
-        <li>
-          <Link href="/photos">Photos</Link>
-        </li>
-      </ul>
+          <li>
+            <Link href="/photos">Photos</Link>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 }
