@@ -1,7 +1,8 @@
 import HeadInfo from '../components/HeadInfo';
 import Image from 'next/image';
+import photosStyles from '../styles/Photos.module.css';
 
-interface IPhoto {
+export interface IPhoto {
   albumid: number;
   id: number;
   title: string;
@@ -18,7 +19,7 @@ export default function photos({ photos }: Props) {
     <>
       <HeadInfo title="My Blog Photos" />
       <h1>My photos</h1>
-      <ul>
+      <ul className={photosStyles.photos}>
         {photos.map((photo, id) => (
           <li key={id}>
             <Image
@@ -27,6 +28,7 @@ export default function photos({ photos }: Props) {
               height={100}
               alt={photo.title}
             />
+            <span>{photo.title}</span>
           </li>
         ))}
       </ul>
