@@ -1,6 +1,7 @@
 import Image from 'next/link';
 import { IPhoto } from '../photos';
 import Link from 'next/link';
+import { GetStaticPropsContext } from 'next';
 
 interface Props {
   photo: IPhoto;
@@ -8,8 +9,6 @@ interface Props {
 
 export default function ({ photo }: Props) {
   const { title, url } = photo;
-  console.log(title);
-  console.log(url);
   return (
     <div>
       <h2>{title}</h2>
@@ -19,8 +18,9 @@ export default function ({ photo }: Props) {
   );
 }
 
-export const getStaticProps = async () => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/photos/2`);
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  const id = context.params?.id;
+  const res = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`);
   const photo = await res.json();
 
   return {
@@ -36,7 +36,7 @@ export const getStaticPaths = async () => {
     `https://jsonplaceholder.typicode.com/photos?_start=0&_end=10`,
   );
   const photos = await res.json();
-  const ids = photos.map((photo: { id: number }) => photo.id);
+  const ids = photos.map((photo: IPhoto) => photo.id);
   const paths = ids.map((id: { toString: () => any }) => {
     return {
       params: {
@@ -45,6 +45,8 @@ export const getStaticPaths = async () => {
     };
   });
 
+  console.log(paths);
+  console.log(ids);
   return {
     paths,
     fallback: false,

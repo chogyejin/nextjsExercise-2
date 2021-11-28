@@ -1,6 +1,7 @@
 import HeadInfo from '../components/HeadInfo';
 import Image from 'next/image';
 import photosStyles from '../styles/Photos.module.css';
+import Link from 'next/link';
 
 export interface IPhoto {
   albumid: number;
@@ -22,13 +23,17 @@ export default function photos({ photos }: Props) {
       <ul className={photosStyles.photos}>
         {photos.map((photo, id) => (
           <li key={id}>
-            <Image
-              src={photo.thumbnailUrl}
-              width={100}
-              height={100}
-              alt={photo.title}
-            />
-            <span>{photo.title}</span>
+            <Link href={`/photos/${photo.id}`}>
+              <a>
+                <Image
+                  src={photo.thumbnailUrl}
+                  width={100}
+                  height={100}
+                  alt={photo.title}
+                />
+                <span>{photo.title}</span>
+              </a>
+            </Link>
           </li>
         ))}
       </ul>
