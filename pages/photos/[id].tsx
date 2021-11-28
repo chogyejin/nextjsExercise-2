@@ -1,4 +1,4 @@
-import Image from 'next/link';
+import Image from 'next/image';
 import { IPhoto } from '../photos';
 import Link from 'next/link';
 import { GetStaticPropsContext } from 'next';
@@ -12,7 +12,7 @@ export default function ({ photo }: Props) {
   return (
     <div>
       <h2>{title}</h2>
-      <img src={url} width={500} height={500} />
+      <Image src={url} width={500} height={500} />
       <Link href="/photos">Go back</Link>
     </div>
   );
